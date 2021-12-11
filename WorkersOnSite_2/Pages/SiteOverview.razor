@@ -1,0 +1,39 @@
+﻿@page "/siteoverview"
+
+<h1 class="page-title">All Teams</h1>
+
+@if (Sites == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Site ID</th>
+        <th>Site Name:</th>
+        <th>Site Location:</th>
+        <th>Is the Work completed:</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var oneSite in Sites)
+      {
+      <tr>
+        <td>@oneSite.SiteID</td>
+        <td>@oneSite.SiteName</td>
+        <td>@oneSite.SiteLocation</td>
+        <td>@oneSite.SiteIsCompleted ? Yes : No</td>
+        <td>
+          <a href="@($"/sitedetail/{oneSite.SiteID}")" class="btn btn-primary table-btn">
+            <i class="fas fa-info-circle"></i>
+          </a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+}
+
+

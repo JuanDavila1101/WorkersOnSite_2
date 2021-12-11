@@ -1,0 +1,34 @@
+﻿@page "/teamoverview"
+
+<h1 class="page-title">All Teams</h1>
+
+@if (Teams == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Team ID</th>
+        <th>Team Name:</th>
+        <th>Team Location:</th>
+        <th>Team Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var oneTeam in Teams)
+      {
+      <tr>
+        <td>@oneTeam.TeamID</td>
+        <td>@oneTeam.TeamName</td>
+        <td>@oneTeam.TeamLocation</td>
+        <td>@oneTeam.TeamNumber</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+}
+
+

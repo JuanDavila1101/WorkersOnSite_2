@@ -2,9 +2,9 @@
 
 namespace WorkersOnSite_2.Shared
 {
-  class Person
+  public class Person
   {
-    public Guid       PersonID           { get; set; }
+    public string        PersonID           { get; set; }
     public string     PersonFireBaseKey  { get; set; }
     public string     PersonFName        { get; set; }
     public char       PersonMInitial     { get; set; }
