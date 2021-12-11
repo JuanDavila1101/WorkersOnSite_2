@@ -1,0 +1,83 @@
+﻿@page "/sitedetail/{SiteID}"
+
+<h1 class="page-title">Details for @Site.SiteName</h1>
+
+<div class="col-12 row">
+  <div class="col-2">Image here</div>
+  <div class="col-10">
+    <div class="col-xs-12 col-sm-8">
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Worker ID</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteID</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">First Name</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteName</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Middle Initial</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteLocation</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Last Name</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteNumber</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">First Name</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteStartTime.ToShortDateString()</label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Birthdate</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.SiteIsCompleted ? Yes : No</label>                                                                                                                                                                                                                                                                                             
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Salary</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.TeamID</label>
+        </div>
+      </div>
+
+      @*<div class="form-group row">
+        <label class="col-sm-4 col-form-label">Phone Number1</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Team="Team"</label>
+        </div>
+      </div>*@
+
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Phone Number2</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Site.PersonID</label>
+        </div>
+      </div>
+
+      @*<div class="form-group row">
+        <label class="col-sm-4 col-form-label">Person Type</label>
+        <div class="col-sm-8">
+          <label type="text" class="form-control-plaintext">@Person="Person"</label>
+        </div>
+      </div>*@
+
+    </div>
+  </div>
+</div>
+

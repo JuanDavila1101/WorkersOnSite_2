@@ -1,6 +1,6 @@
 ﻿namespace WorkersOnSite_2.Shared
 {
-  enum PersonType
+  public enum PersonType
   {
     Manager,
     TeamLead,

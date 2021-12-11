@@ -1,0 +1,39 @@
+﻿@page "/personoverview"
+
+<h1 class="page-title">All Workers</h1>
+
+@if (Persons == null)
+{
+  <p><em>Loading...</em></p>
+}
+else
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Worker ID</th>
+        <th>First Name:</th>
+        <th>Middle Initial:</th>
+        <th>Last Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var person in Persons)
+      {
+      <tr>
+        <td>@person.PersonID</td>
+        <td>@person.PersonFName</td>
+        <td>@person.PersonMInitial</td>
+        <td>@person.PersonLName</td>
+        <td>
+          <a href="@($"persondetail/{person.PersonID}")" class="btn btn-primary table-btn">
+            <i class="fas fa-info-circle"></i>
+          </a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+}
+
+
