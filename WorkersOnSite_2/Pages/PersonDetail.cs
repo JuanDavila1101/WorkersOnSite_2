@@ -3,12 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkersOnSite_2.Model;
 using WorkersOnSite_2.Shared;
+
 
 namespace WorkersOnSite_2.Pages
 {
   public partial class PersonDetail
   {
+    private readonly IPersonRepository _personRepo;
+
     [Parameter]
     // public string person
     //public Person Person { get; set; } = new Person();
@@ -18,12 +22,20 @@ namespace WorkersOnSite_2.Pages
     public Person Person { get; set; } = new Person();
     public IEnumerable<Person> Persons { get; set; }
 
+    public PersonDetail(IPersonRepository personRepo)
+    {
+      _personRepo = personRepo;
+    }
+
     protected override Task OnInitializedAsync()
     {
-      InitializePerson();
+      //  InitializePerson();
+
+      Persons = _personRepo.GetAllPersons();
+
 
       // Person = Person.FirstOrDefault(e => e.Pe);
-     Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
+      Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
 
       return base.OnInitializedAsync();
     }

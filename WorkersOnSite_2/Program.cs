@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using WorkersOnSite_2.Model;
 
 namespace WorkersOnSite_2
 {
@@ -18,6 +19,7 @@ namespace WorkersOnSite_2
       builder.RootComponents.Add<App>("#app");
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+      builder.Services.AddTransient<IPersonRepository, PersonRepository>();
 
       await builder.Build().RunAsync();
     }
