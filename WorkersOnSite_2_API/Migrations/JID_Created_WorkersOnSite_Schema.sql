@@ -24,7 +24,7 @@
     --CREATE TABLE dbo.TEAMS 
     --(
     --    TeamID                  uniqueidentifier NOT NULL Primary Key Default(newsequentialid())
-    --   ,TeamFName               nvarchar(50)     NULL Default('')
+    --   ,TeamName               nvarchar(50)     NULL Default('')
     --   ,TeamLocation            nvarchar(50)     NULL Default('')
     --   ,TeamPhoneNumber         nvarchar(50)     NULL Default('')
     --)
@@ -44,7 +44,7 @@
     --SELECT * FROM PERSONTEAM
 
 
-    ----DROP TABLE SITES
+    --DROP TABLE SITES
     --CREATE TABLE dbo.SITES 
     --(
     --    SiteID               uniqueidentifier    NOT NULL Primary Key Default(newsequentialid())
@@ -53,8 +53,8 @@
     --   ,SiteNumber           nvarchar(50)        NULL Default('')
     --   ,SiteStartTime        DateTime            NULL Default(dateadd(mm, 1, dateadd(dd, -day(getdate())+1, getdate())))
     --   ,SiteIsCompleted      bit                 NULL Default(0)
-    --   ,SitesTeamID          uniqueidentifier    NULL Default('')
-    --   ,SitesPersonID        uniqueidentifier    NULL Default('')
+    --   ,SitesTeamID          uniqueidentifier    NULL 
+    --   ,SitesPersonID        uniqueidentifier    NULL 
     --)
     --ALTER TABLE dbo.SITES 
     --   ADD FOREIGN KEY (SitesTeamID) REFERENCES dbo.TEAMS (TeamID)

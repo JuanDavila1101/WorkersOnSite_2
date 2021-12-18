@@ -13,8 +13,8 @@ namespace WorkersOnSite_2.Pages
   {
     //[Inject]
     //protected IDataAccess DataRepository { get; set }
-
-    private readonly IPersonRepository _personRepo;
+    [Inject]
+    public IPersonService PersonService { get; set; }
 
     [Parameter]
     // public string person
@@ -25,22 +25,20 @@ namespace WorkersOnSite_2.Pages
     public Person Person { get; set; } = new Person();
     public IEnumerable<Person> Persons { get; set; }
 
-    public PersonDetail(IPersonRepository personRepo)
-    {
-      _personRepo = personRepo;
-    }
 
-    protected override Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
       //  InitializePerson();
 
-      Persons = _personRepo.GetAllPersons();
+      Persons = await PersonService.GetAllPersons();
 
 
       // Person = Person.FirstOrDefault(e => e.Pe);
       Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
 
-      return base.OnInitializedAsync();
+      await base.OnInitializedAsync();
+
+      return;
     }
 
     private void InitializePerson()

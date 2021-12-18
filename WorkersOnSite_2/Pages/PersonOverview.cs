@@ -8,9 +8,10 @@ using WorkersOnSite_2.Shared;
 
 namespace WorkersOnSite_2.Pages
 {
-  public partial class PersonOverview
+  public partial class PersonOverview : ComponentBase
   {
-    private readonly IPersonRepository _personRepo;
+    [Inject]
+    public IPersonService PersonService { get; set; }
 
     [Parameter]
     // public string person
@@ -21,20 +22,17 @@ namespace WorkersOnSite_2.Pages
     public IEnumerable<Person> Persons { get; set; }
 
 
-    public PersonOverview(IPersonRepository personRepo)
+    protected async override Task OnInitializedAsync()
     {
-      _personRepo = personRepo;
-
-      Persons = _personRepo.GetAllPersons();
-
+      Persons = await PersonService.GetAllPersons();
       Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
+      
+      await base.OnInitializedAsync();
 
+      return;
     }
 
-
-
-
-    //public PersonOverview(IPersonRepository personRepo)
+    //public PersonOverview(IPersonService personRepo)
     //{
     //  _personRepo = personRepo;
 
@@ -42,17 +40,6 @@ namespace WorkersOnSite_2.Pages
 
     //  Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
 
-    //}
-
-    //protected override Task OnInitializeAsync()
-    //{
-    //  //InitializePerson();
-    //  Persons = _personRepo.GetAllPersons();
-
-    //  Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
-
-    //  //  return base.OnInitializedAsync();
-    //  return base.OnInitializeAsync();
     //}
 
     private void InitializePerson()

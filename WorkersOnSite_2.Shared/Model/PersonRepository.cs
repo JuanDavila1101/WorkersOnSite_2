@@ -26,7 +26,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       _persons = db.Query<Person>(@"
-                                    SELECT PersonID          
+                                    SELECT cast(PersonID as varchar(36)) PersonID,         
                                           ,PersonFireBase    
                                           ,PersonFName       
                                           ,PersonMInitial    

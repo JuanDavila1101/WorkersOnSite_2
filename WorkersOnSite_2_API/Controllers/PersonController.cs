@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkersOnSite_2_API.Model;
 
 namespace WorkersOnSite_2_API.Controllers
 {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using WorkersOnSite_2.Shared;
 
-namespace WorkersOnSite_2_API.Controllers
+namespace WorkersOnSite_2_API.Model
 {
   public interface IPersonRepository
   {

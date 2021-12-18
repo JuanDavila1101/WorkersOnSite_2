@@ -4,9 +4,9 @@ using WorkersOnSite_2.Shared;
 
 namespace WorkersOnSite_2.Model
 {
-  public interface IPersonRepository
+  public interface IPersonService
   {
-    IEnumerable<Person> GetAllPersons();
+    Task<IEnumerable<Person>> GetAllPersons();
     Task<Person> GetPersonByID(string personID);
   }
 }

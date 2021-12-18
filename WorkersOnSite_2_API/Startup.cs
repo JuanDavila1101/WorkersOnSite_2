@@ -28,7 +28,7 @@ namespace WorkersOnSite_2_API
     public void ConfigureServices(IServiceCollection services)
     {
 
-      services.AddTransient<PersonRepository>();
+      services.AddTransient<IPersonRepository, PersonRepository>();
 
       services.AddControllers();
       services.AddSwaggerGen(c =>
