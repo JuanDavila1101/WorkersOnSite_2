@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkersOnSite_2", "WorkersO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkersOnSite_2.Shared", "WorkersOnSite_2.Shared\WorkersOnSite_2.Shared.csproj", "{E1B25606-8279-4E9D-BFBF-E94A8F5A50FA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkersOnSite_2_API", "WorkersOnSite_2_API\WorkersOnSite_2_API.csproj", "{17668C6E-3BF6-48A1-982A-44A0A8E18A59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E1B25606-8279-4E9D-BFBF-E94A8F5A50FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1B25606-8279-4E9D-BFBF-E94A8F5A50FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1B25606-8279-4E9D-BFBF-E94A8F5A50FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17668C6E-3BF6-48A1-982A-44A0A8E18A59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17668C6E-3BF6-48A1-982A-44A0A8E18A59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17668C6E-3BF6-48A1-982A-44A0A8E18A59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17668C6E-3BF6-48A1-982A-44A0A8E18A59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,8 +9,11 @@ using WorkersOnSite_2.Shared;
 
 namespace WorkersOnSite_2.Pages
 {
-  public partial class PersonDetail
+  public partial class PersonDetail : IComponent
   {
+    //[Inject]
+    //protected IDataAccess DataRepository { get; set }
+
     private readonly IPersonRepository _personRepo;
 
     [Parameter]
