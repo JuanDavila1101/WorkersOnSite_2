@@ -31,9 +31,9 @@ namespace WorkersOnSite_2.Pages
         SiteNumber = "1",
         SiteStartTime = new DateTime(2022, 1, 15),
         SiteIsCompleted = false,
-        TeamID = "1",
+        SiteTeamID = "1",
         TeamAssigned = new Team(),
-        PersonID = "1",
+        SitePersonID = "1",
         SitePOCPerson = new Person(),
       };
 
@@ -45,9 +45,9 @@ namespace WorkersOnSite_2.Pages
         SiteNumber = "2",
         SiteStartTime = new DateTime(2022, 1, 22),
         SiteIsCompleted = false,
-        TeamID = "2",
+        SiteTeamID = "2",
         TeamAssigned = new Team(),
-        PersonID = "2",
+        SitePersonID = "2",
         SitePOCPerson = new Person(),
       };
 

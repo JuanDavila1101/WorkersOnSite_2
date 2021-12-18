@@ -1,14 +1,18 @@
-﻿using System;
-using WorkersOnSite_2.Shared;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Components;
 using System.Linq;
+using System.Threading.Tasks;
+using WorkersOnSite_2.Model;
+using WorkersOnSite_2.Shared;
 
 namespace WorkersOnSite_2.Pages
 {
-  public partial class PersonOverview
+  public partial class PersonOverview : ComponentBase
   {
+    [Inject]
+    public IPersonService PersonService { get; set; }
+
     [Parameter]
     // public string person
     //public Person Person { get; set; } = new Person();
@@ -17,12 +21,26 @@ namespace WorkersOnSite_2.Pages
     public Person Person { get; set; } = new Person();
     public IEnumerable<Person> Persons { get; set; }
 
-    protected override Task OnInitializedAsync()
+
+    protected async override Task OnInitializedAsync()
     {
-      InitializePerson();
+      Persons = await PersonService.GetAllPersons();
       Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
-      return base.OnInitializedAsync();
+      
+      await base.OnInitializedAsync();
+
+      return;
     }
+
+    //public PersonOverview(IPersonService personRepo)
+    //{
+    //  _personRepo = personRepo;
+
+    //  Persons = _personRepo.GetAllPersons();
+
+    //  Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
+
+    //}
 
     private void InitializePerson()
     {

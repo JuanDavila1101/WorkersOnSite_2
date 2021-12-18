@@ -4,4 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="Model\**" />
+  </ItemGroup>
+
 </Project>

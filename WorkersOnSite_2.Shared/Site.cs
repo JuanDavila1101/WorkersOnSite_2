@@ -10,9 +10,9 @@ namespace WorkersOnSite_2.Shared
     public string   SiteNumber      { get; set; }
     public DateTime SiteStartTime   { get; set; }
     public bool     SiteIsCompleted { get; set; }
-    public string   TeamID          { get; set; }
+    public string   SiteTeamID      { get; set; }
     public Team     TeamAssigned    { get; set; }
-    public string   PersonID        { get; set; }
+    public string   SitePersonID    { get; set; }
     public Person   SitePOCPerson   { get; set; }
   }
 }

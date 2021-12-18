@@ -28,7 +28,6 @@
 
   //  public static readonly PersonType Manager = new PersonType("MNG", "Manager");
 
-
   //}
 
 
