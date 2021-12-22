@@ -1,21 +1,21 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WorkersOnSite_2.Shared;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using Dapper;
 using WorkersOnSite_2_API.Controllers;
 
 namespace WorkersOnSite_2_API.Model
 {
   public class PersonRepository : IPersonRepository
   {
+    //private readonly AppDbContext;
+
     static List<Person> _persons = new List<Person>();
-
     readonly string _connectionString;
-
     public PersonRepository(IConfiguration config)
     {
       _connectionString = config.GetConnectionString("WorkersonSite2DB");
@@ -73,6 +73,21 @@ namespace WorkersOnSite_2_API.Model
       var personByID = await db.QueryFirstOrDefaultAsync<Person>(sql, convertPersonIDToGUID );
       return personByID;
     }
+
+    //public Person AddPerso(Person person)
+    //{
+    //  var addedEntity =
+    //}
+
+
+
+
+
+
+
+
+
+
 
 
   }
