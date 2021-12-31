@@ -26,11 +26,24 @@ namespace WorkersOnSite_2_API.Controllers
       return Ok(_personRepository.GetAllPersons());
     }
 
+    //// Get api/<controller>/id
+    ////[HttpGet("id")]'
+    //[HttpGet("api/person/{id}")]
+    //public async Task<IActionResult> GetPersonByID(string personID)
+    //{
+    //  var person = await _personRepository.GetPersonByID(personID);
+
+    //  return Ok(person);
+    //}
+
+
+
     // Get api/<controller>/id
-    [HttpGet("id")]
-    public async Task<IActionResult> GetPersonByID(string personID)
+    //[HttpGet("id")]'
+    [HttpGet("api/person/{id}")]
+    public IActionResult GetPersonByID(string personID)
     {
-      var person = await _personRepository.GetPersonByID(personID);
+      var person =  _personRepository.GetPersonByID(personID);
 
       return Ok(person);
     }

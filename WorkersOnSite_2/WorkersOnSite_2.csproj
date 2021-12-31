@@ -17,4 +17,10 @@
     <ProjectReference Include="..\WorkersOnSite_2.Shared\WorkersOnSite_2.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Person\" />
+    <Folder Include="Pages\Site\" />
+    <Folder Include="Pages\Team\" />
+  </ItemGroup>
+
 </Project>

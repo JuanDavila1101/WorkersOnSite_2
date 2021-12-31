@@ -10,7 +10,7 @@ using System;
 //using System.Collections.Generic;
 //using System.Text;
 
-namespace WorkersOnSite_2
+namespace WorkersOnSite_2 
 {
   public class Program
   {
@@ -20,9 +20,12 @@ namespace WorkersOnSite_2
       builder.RootComponents.Add<App>("#app");
 
       builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+      // These are Http Client Factories
       builder.Services.AddHttpClient<IPersonService, PersonService>(client => client.BaseAddress=new Uri("https://localhost:44354"));
-
-
+      builder.Services.AddHttpClient<ISiteService, SiteService>(client => client.BaseAddress = new Uri("https://localhost:44354"));
+      builder.Services.AddHttpClient<ITeamService, TeamService>(client => client.BaseAddress = new Uri("https://localhost:44354"));
+      
       await builder.Build().RunAsync();
     }
   }

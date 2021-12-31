@@ -1,0 +1,97 @@
+﻿@page "/personedit"
+@page "/personedit/{PersonID}"
+
+@using WorkersOnSite_2.Shared
+
+
+@if (!Saved)
+{
+  <section class="person-edit">
+    <h1 class="page-tittle">Details for Worker @Person.PersonFName @Person.PersonLName</h1>
+    <EditForm Model="@Person" OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit">
+      <DataAnnotationsValidator />
+      <ValidationSummary></ValidationSummary>
+
+      @*<div class="form-group" row>
+        <label for="image" class="col-sm-3">/Select Image</label>
+      <InputFile OnChange="OnInputFileChange" multiple/>
+    </div>*@
+
+
+      @*<div class="form-group row">
+      <label for="personLastName" class="col-sm-3">Last Name:</label>
+      <input @ref="PersonLastNameInput" id="personLastName" class="form-control col-8" @bind="@Person.PersonLName" />
+    </div>*@
+
+
+
+
+      <div class="form-group row">
+        <label for="personFirstName" class="col-sm-3">First Name:</label>
+        <InputText id="personFirstName" class="form-control col-8" @bind-Value="@Person.PersonFName" placeholder="Please enter the first name" />
+      </div>
+
+      @*<div class="form-group row">
+      <label for="personMiddleInitial" class="col-sm-3">Middle Initial:</label>
+      <InputText id="personMiddleInitial" class="form-control col-8" @bind-Value="@Person.PersonMInitial" placeholder="Enter the middle initial" />
+    </div>*@
+
+
+      @*This is co the middle initial*@
+      @*<div class="form-group row">
+      <label for="personLastName" class="col-sm-3">Last Name:</label>
+      <InputText id="personLastName" class="form-control col-8" @bind-Value="@Person.PersonLName" placeholder="Please enter the last name" />
+    </div>*@
+
+      <div class="form-group row">
+        <label for="personLastName" class="col-sm-3">Last Name:</label>
+        <InputText id="personLastName" class="form-control col-8" @bind-Value="@Person.PersonLName" placeholder="Please enter the last name" />
+      </div>
+
+      <div class="form-group row">
+        <label for="personSSN" class="col-sm-3">SSN:</label>
+        <InputText id="personSSN" class="form-control col-8" @bind-Value="@Person.PersonSSN" placeholder="Please enter the SSN" />
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="personBirthday" class="col-sm-3">SSN:</label>
+        <InputDate id="personBirthday" class="form-control col-8" @bind-Value="@Person.PersonBirthday"  />
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="personPhoneNumber1" class="col-sm-3">Phone Number 1:</label>
+        <InputText id="personPhoneNumber1" class="form-control col-8" @bind-Value="@Person.PersonPhoneNumber1" placeholder="Please enter Phone Number 1" />
+      </div>
+
+      <div class="form-group row">
+        <label for="personPhoneNumber2" class="col-sm-3">Phone Number 2:</label>
+        <InputText id="personPhoneNumber2" class="form-control col-8" @bind-Value="@Person.PersonPhoneNumber2" placeholder="Please enter Phone Number 2" />
+      </div>
+
+
+    </EditForm>
+
+
+
+  </section>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
