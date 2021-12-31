@@ -48,6 +48,17 @@ namespace WorkersOnSite_2.Model
                (await _httpClient.GetStreamAsync(url), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
     }
 
+    //private async Task<T> Get<T>(string url, T itemToGet)
+    //{
+    //  var body = new StringContent(JsonSerializer.Serialize<T>(itemToGet));
+
+    //  return await _httpClient.GetAsync(url, body);
+
+    //  //return await JsonSerializer.DeserializeAsync<T>
+    //  //         (await _httpClient.GetStreamAsync(url), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+    //}
+
+
     private async Task<HttpResponseMessage> Post<T>(string url, T itemToPost)
     {
       var body = new StringContent(JsonSerializer.Serialize<T>(itemToPost));
@@ -69,8 +80,32 @@ namespace WorkersOnSite_2.Model
 
     public async Task<Person> GetPersonByID(string personID)
     {
+      //return await GetAsync<Person>($"api/person/{personID}");
       return await Get<Person>($"api/person/{personID}");
     }
+
+    //public async Task<Person> GetPersonByID(string personID)
+    //{
+    //  return await Get<Person>($"api/person/{personID}");
+    //  //return await Get<Person>($"api/person/{personID}");
+    //}
+
+    //public Person GetPersonByID(string personID)
+    //{
+    //  return Get<Person>($"api/person/{personID}");
+    //  //return await Get<Person>($"api/person/{personID}");
+    //}
+
+    //public async Task<Person> GetPersonByID(Person person)
+    //{
+
+    //  var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "api/json");
+
+    // return await _httpClient.PutAsync("api/person", personJson);
+
+    //  //return await GetAsync<Person>($"api/person/{personID}");
+    //  //return await Get<Person>($"api/person/{personID}");
+    //}
 
     public async Task<Person> AddPerson(Person person)
     {

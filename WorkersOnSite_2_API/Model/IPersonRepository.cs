@@ -8,5 +8,6 @@ namespace WorkersOnSite_2_API.Model
   {
     IEnumerable<Person> GetAllPersons();
     Task<Person> GetPersonByID(string personID);
+    //Person GetPersonByID(string personID);
   }
 }

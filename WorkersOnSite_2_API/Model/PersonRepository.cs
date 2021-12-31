@@ -6,13 +6,12 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Threading.Tasks;
 using Dapper;
-using WorkersOnSite_2_API.Controllers;
 
 namespace WorkersOnSite_2_API.Model
 {
   public class PersonRepository : IPersonRepository
   {
-    //private readonly AppDbContext;
+    //private readonly AppDbContext appDbContext;
 
     static List<Person> _persons = new List<Person>();
     readonly string _connectionString;
@@ -46,6 +45,14 @@ namespace WorkersOnSite_2_API.Model
       return _persons;
     }
 
+    //public Person GetPersonByID(string personID)
+    //{
+    //  return (Person)_persons.Find(x => x.PersonID == personID);
+    //}
+
+
+
+
     public async Task<Person> GetPersonByID(string personID)
     {
       using var db = new SqlConnection(_connectionString);
@@ -70,23 +77,105 @@ namespace WorkersOnSite_2_API.Model
         PersonID = personID
       };
 
-      var personByID = await db.QueryFirstOrDefaultAsync<Person>(sql, convertPersonIDToGUID );
+      var personByID = await db.QueryFirstOrDefaultAsync<Person>(sql, convertPersonIDToGUID);
       return personByID;
     }
 
-    //public Person AddPerso(Person person)
-    //{
-    //  var addedEntity =
-    //}
+    public Person AddPerson(Person person)
+    {
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = @"
+                  INSERT INTO PERSON 
+                        ( PersonFireBase
+                         ,PersonFName
+                         ,PersonMInitial
+                         ,PersonLName
+                         ,PersonSSN
+                         ,PersonBirthday
+                         ,PersonSalary
+                         ,PersonPhoneNumber1
+                         ,PersonPhoneNumber2
+                         ,PersonType)
+                  VALUES (
+                           @PersonFireBase
+                          ,@PersonFName
+                          ,@PersonMInitial
+                          ,@PersonLName
+                          ,@PersonSSN
+                          ,@PersonBirthday
+                          ,@PersonSalary
+                          ,@PersonPhoneNumber1
+                          ,@PersonPhoneNumber2
+                          ,@PersonType
+                          )";
+
+      var parameters = new
+      {
+        PersonFireBase     = person.PersonFireBaseKey,
+        PersonFName        = person.PersonFName,
+        PersonMInitial     = person.PersonMInitial,
+        PersonLName        = person.PersonLName,
+        PersonSSN          = person.PersonSSN,
+        PersonBirthday     = person.PersonBirthday,
+        PersonSalary       = person.Salary,
+        PersonPhoneNumber1 = person.PersonPhoneNumber1,
+        PersonPhoneNumber2 = person.PersonPhoneNumber2,
+        PersonType         = 2
+      };
+
+      return db.QueryFirstOrDefault<Person>(sql, parameters);
+    }
 
 
+    public Person UpdatePerson(Person person)
+    {
+      using var db = new SqlConnection(_connectionString);
 
+      var sql = @"
+                  UPDATE PERSON 
+                          PersonFireBase     = @PersonFireBase
+                         ,PersonFName        = @PersonFName
+                         ,PersonMInitial     = @PersonMInitial
+                         ,PersonLName        = @PersonLName
+                         ,PersonSSN          = @PersonSSN
+                         ,PersonBirthday     = @PersonBirthday
+                         ,PersonSalary       = @PersonSalary
+                         ,PersonPhoneNumber1 = @PersonPhoneNumber1
+                         ,PersonPhoneNumber2 = @PersonPhoneNumber2
+                         ,PersonType         = @PersonType 
+                  WHERE PersonID = CAST(@PersonID AS uniqueidentifier)
+                   ";
 
+      var parameters = new
+      {
+        PersonID = person.PersonID,
+        PersonFireBase = person.PersonFireBaseKey,
+        PersonFName = person.PersonFName,
+        PersonMInitial = person.PersonMInitial,
+        PersonLName = person.PersonLName,
+        PersonSSN = person.PersonSSN,
+        PersonBirthday = person.PersonBirthday,
+        PersonSalary = person.Salary,
+        PersonPhoneNumber1 = person.PersonPhoneNumber1,
+        PersonPhoneNumber2 = person.PersonPhoneNumber2,
+        PersonType = 2
+      };
 
+      return db.QueryFirstOrDefault<Person>(sql, parameters);
+    }
 
+    public void DeletePerson(string personID)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var sql = @"
+                  DELETE 
+                  FROM PERSON
+                  WHERE PersonID = CAST(@personID  AS uniqueidentifier)
+                  ";
 
-
-
+      db.Execute(sql, new { personID });
+    }
 
 
 

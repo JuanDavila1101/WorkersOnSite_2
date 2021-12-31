@@ -8,6 +8,7 @@ namespace WorkersOnSite_2.Model
   {
     Task<IEnumerable<Person>> GetAllPersons();
     Task<Person> GetPersonByID(string personID);
+    //Person GetPersonByID(string personID);
     Task<Person> AddPerson(Person person);
     Task UpdatePerson(Person person);
     Task DeletePerson(string personID);

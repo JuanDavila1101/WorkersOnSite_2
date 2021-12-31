@@ -62,6 +62,14 @@ namespace WorkersOnSite_2.Pages
       else
       {
         Person = await PersonService.GetPersonByID(PersonID);
+        //Person = PersonService.GetPersonByID(PersonID);
+
+        // Persons = await PersonService.GetAllPersons();
+        // Person = Persons.FirstOrDefault(p => p.PersonID == PersonID);
+
+
+
+
       }
 
     }
