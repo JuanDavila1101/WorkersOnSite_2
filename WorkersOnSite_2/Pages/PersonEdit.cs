@@ -17,11 +17,12 @@ namespace WorkersOnSite_2.Pages
     [Inject]
     public ITeamService TeamService { get; set; }
 
+
     [Parameter]
     public string PersonID { get; set; }
 
     [Inject]
-    NavigationManager navigationManager { get; set; }
+    NavigationManager NavigationManager { get; set; }
 
     public Person Person { get; set; } = new Person();
     public List<Team> Teams { get; set; } = new List<Team>();
@@ -30,12 +31,12 @@ namespace WorkersOnSite_2.Pages
     protected string StatusClass = string.Empty;
     protected bool Saved;
 
-    private ElementReference PersonLastNameInput;
+    private ElementReference personLastName;
 
-    protected async override Task OnAfterRenderAsync(bool firstRender)
-    {
-      await PersonLastNameInput.FocusAsync();
-    }
+    //protected async override Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //  await personLastName.FocusAsync();
+    //}
 
     protected override async Task OnInitializedAsync()
     {
@@ -56,7 +57,8 @@ namespace WorkersOnSite_2.Pages
           Salary = 1000,
           PersonPhoneNumber1 = "615-000-0000",
           PersonPhoneNumber2 = "910-000-0000",
-          _PersonType = PersonType.Employee
+          _PersonType = PersonType.Employee,
+          TeamID = ""
         };
       }
       else
@@ -96,6 +98,7 @@ namespace WorkersOnSite_2.Pages
       }
       else
       {
+        //await PersonService.UpdatePerson(Person);
         await PersonService.UpdatePerson(Person);
         StatusClass = "alert-success";
         Message = "The Person was updated successfully.";
@@ -119,10 +122,10 @@ namespace WorkersOnSite_2.Pages
       Saved = true;
     }
 
-    //protected void NavigateToOverview()
-    //{
-    //  NavigationManager.NavigateTo("/personoverview");
-    //}
+    protected void NavigateToOverview()
+    {
+      NavigationManager.NavigateTo("/personoverview");
+    }
 
 
 

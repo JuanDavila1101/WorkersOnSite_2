@@ -46,7 +46,7 @@
 
       <div class="form-group row">
         <label for="personLastName" class="col-sm-3">Last Name:</label>
-        <InputText id="personLastName" class="form-control col-8" @bind-Value="@Person.PersonLName" placeholder="Please enter the last name" />
+        <input @ref="personLastName" id="personLastName" class="form-control col-8" @bind="@Person.PersonLName" placeholder="Please enter the last name" />
       </div>
 
       <div class="form-group row">
@@ -58,7 +58,7 @@
 
       <div class="form-group row">
         <label for="personBirthday" class="col-sm-3">SSN:</label>
-        <InputDate id="personBirthday" class="form-control col-8" @bind-Value="@Person.PersonBirthday"  />
+        <InputDate id="personBirthday" class="form-control col-8" @bind-Value="@Person.PersonBirthday" />
       </div>
 
 
@@ -73,6 +73,36 @@
         <InputText id="personPhoneNumber2" class="form-control col-8" @bind-Value="@Person.PersonPhoneNumber2" placeholder="Please enter Phone Number 2" />
       </div>
 
+      <div class="form-group row">
+        <label for="team" class="col-sm-3">Team:</label>
+        <InputSelect id="team" class="form-control col-sm-8" @bind-Value="@Person.TeamID">
+          @foreach (var team in Teams)
+          {
+            <option value="@team.TeamID">@team.TeamName</option>
+          }
+        </InputSelect>
+      </div>
+
+      <div class="form-group row">
+        <label for="type" class="col-sm-3">Person Type:</label>
+        <InputSelect id="team" class="form-control col-sm-8" @bind-Value="@Person._PersonType">
+
+        <option value="@(PersonType.Customer)">Customer</option>
+        <option value="@(PersonType.Employee)">Employee</option>
+        <option value="@(PersonType.Manager)">Manager</option>
+        <option value="@(PersonType.TeamLead)">Team lead</option>
+
+        </InputSelect>
+      </div>
+
+      @if (Person.PersonID != "")
+      {
+        <a class="btn btn-danger" @onclick="@DeletePerson">Delete</a>
+      }
+
+      <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+
+      <button type="submit" class="btn btn-primary edit-btn">Save person</button>
 
     </EditForm>
 
@@ -81,6 +111,10 @@
   </section>
 
 }
+else
+      {
+        <div class="alert @StatusClass">@Message</div>
+      }
 
 
 

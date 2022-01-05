@@ -10,7 +10,7 @@ namespace WorkersOnSite_2.Model
     Task<Person> GetPersonByID(string personID);
     //Person GetPersonByID(string personID);
     Task<Person> AddPerson(Person person);
-    Task UpdatePerson(Person person);
-    Task DeletePerson(string personID);
+    Task<Person> UpdatePerson(Person person);
+    Task<bool> DeletePerson(string personID);
   }
 }

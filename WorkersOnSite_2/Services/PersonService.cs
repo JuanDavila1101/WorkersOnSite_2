@@ -107,10 +107,23 @@ namespace WorkersOnSite_2.Model
     //  //return await Get<Person>($"api/person/{personID}");
     //}
 
+    //public async Task<Person> AddPerson(Person person)
+    //{
+    //  var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "api/json");
+    //  var response = await _httpClient.PatchAsync("api/person", personJson);
+
+    //  if (response.IsSuccessStatusCode)
+    //  {
+    //    return await JsonSerializer.DeserializeAsync<Person>(await response.Content.ReadAsStreamAsync());
+    //  }
+
+    //  return null;
+    //}
+
     public async Task<Person> AddPerson(Person person)
     {
-      var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "api/json");
-      var response = await _httpClient.PatchAsync("api/person", personJson);
+      var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
+      var response = await _httpClient.PostAsync("api/person", personJson);
 
       if (response.IsSuccessStatusCode)
       {
@@ -120,16 +133,49 @@ namespace WorkersOnSite_2.Model
       return null;
     }
 
-    public async Task UpdatePerson(Person person)
-    {
-      var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "api/json");
 
-      await _httpClient.PutAsync("api/person", personJson);
+
+
+    //public Person UpdatePerson(Person person)
+    //{
+    //  var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "api/json");
+
+    //   _httpClient.PutAsync("api/person", personJson);
+    //}
+
+
+
+
+    public async Task<Person> UpdatePerson(Person person)
+    {
+      var personJson = new StringContent(JsonSerializer.Serialize(person), Encoding.UTF8, "application/json");
+
+      var response = await _httpClient.PutAsync("api/person", personJson);
+
+      if (response.IsSuccessStatusCode)
+      {
+        return await JsonSerializer.DeserializeAsync<Person>(await response.Content.ReadAsStreamAsync());
+      }
+
+      return null;
+
     }
 
-    public async Task DeletePerson(string personID)
+    //public void DeletePerson(string personID)
+    //{
+    //   _httpClient.DeleteAsync($"api/person{personID}");
+    //}
+
+    public async Task<bool> DeletePerson(string personID)
     {
-      await _httpClient.DeleteAsync($"api/person{personID}");
+     var response = await _httpClient.DeleteAsync($"api/person/{personID}");
+
+      if (response.IsSuccessStatusCode)
+      {
+        return await JsonSerializer.DeserializeAsync<bool>(await response.Content.ReadAsStreamAsync());
+      }
+
+      return false;
     }
 
     //public async Task DeletePerson(string personID)

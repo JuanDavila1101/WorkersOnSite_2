@@ -26,7 +26,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       _Teams = db.Query<Team>(@"
-                                SELECT cast(TeamID as varchar(36)) TeamID     
+                                SELECT CAST(TeamID AS varchar(36)) TeamID     
                                       ,TeamName
                                       ,TeamLocation 
                                       ,TeamPhoneNumber
@@ -43,7 +43,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"
-                  SELECT cast(TeamID as varchar(36)) TeamID     
+                  SELECT CAST(TeamID AS varchar(36)) TeamID     
                         ,TeamName
                         ,TeamLocation 
                         ,TeamPhoneNumber

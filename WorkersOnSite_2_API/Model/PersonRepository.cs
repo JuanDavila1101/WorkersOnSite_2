@@ -25,7 +25,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       _persons = db.Query<Person>(@"
-                                    SELECT cast(PersonID as varchar(36)) PersonID     
+                                    SELECT CAST(PersonID AS varchar(36)) PersonID     
                                           ,PersonFireBase    
                                           ,PersonFName       
                                           ,PersonMInitial    
@@ -35,7 +35,10 @@ namespace WorkersOnSite_2_API.Model
                                           ,PersonSalary      
                                           ,PersonPhoneNumber1
                                           ,PersonPhoneNumber2
-                                          ,PersonType        
+                                          ,PersonType       
+                                          ,ISNULL((SELECT CAST(PersonTeamTeamID AS VARCHAR(36)) TeamID 
+                                                   FROM PersonTeam
+                                                   WHERE PersonTeamPersonID = CAST(PersonID AS VARCHAR(36))), '') AS TeamID
                                     FROM PERSON                                    
                                     ").ToList();
     }
@@ -57,7 +60,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"
-                  SELECT PersonID          
+                  SELECT CAST(PersonID AS VARCHAR(36)) PersonID          
                         ,PersonFireBase    
                         ,PersonFName       
                         ,PersonMInitial    
@@ -67,24 +70,29 @@ namespace WorkersOnSite_2_API.Model
                         ,PersonSalary      
                         ,PersonPhoneNumber1
                         ,PersonPhoneNumber2
-                        ,PersonType        
-                  FROM PERSON
-                  WHERE PersonID = CAST(@PersonID AS uniqueidentifier)
+                        ,PersonType   
+                        ,ISNULL((SELECT CAST(PersonTeamTeamID AS VARCHAR(36)) TeamID 
+                                 FROM PersonTeam
+                                 WHERE PersonTeamPersonID = CAST(@personID AS VARCHAR(36))), '') AS TeamID
+                  FROM [WorkersOnSite2DB].[dbo].[PERSON]
+                  WHERE PersonID = CAST(@personID AS uniqueidentifier)
                   ";
 
-      var convertPersonIDToGUID = new
-      {
-        PersonID = personID
-      };
+      //var convertPersonIDToGUID = new
+      //{
+      //  PersonID = personID
+      //};
 
-      var personByID = await db.QueryFirstOrDefaultAsync<Person>(sql, convertPersonIDToGUID);
+
+      var personByID = db.QueryFirstOrDefault<Person>(sql, new { personID });
+
+      //var personByID = await db.QueryFirstOrDefaultAsync<Person>(sql, convertPersonIDToGUID);
       return personByID;
     }
 
-    public Person AddPerson(Person person)
+    public async Task<Person> AddPerson(Person person)
     {
-      using var db = new SqlConnection(_connectionString);
-
+      using var db = new SqlConnection(_connectionString);      
       var sql = @"
                   INSERT INTO PERSON 
                         ( PersonFireBase
@@ -121,20 +129,75 @@ namespace WorkersOnSite_2_API.Model
         PersonSalary       = person.Salary,
         PersonPhoneNumber1 = person.PersonPhoneNumber1,
         PersonPhoneNumber2 = person.PersonPhoneNumber2,
-        PersonType         = 2
+        PersonType         = (int)person._PersonType
       };
 
-      return db.QueryFirstOrDefault<Person>(sql, parameters);
+      var tempPerson = db.QueryFirstOrDefault<Person>(sql, parameters);
+
+      HandleTeam(tempPerson);
+
+      return tempPerson;
+    }
+
+    void HandleTeam(Person person)
+    {
+      if (person == null) return;
+
+      using var db = new SqlConnection(_connectionString);
+
+      var sql = string.Empty;
+
+      if (string.IsNullOrWhiteSpace(person.TeamID))
+      {
+        DeleteTeam(person.PersonID);
+      } 
+      else
+      {
+        sql = @"
+                IF NOT EXISTS(
+                              SELECT * 
+                              FROM PersonTeam
+                              WHERE PersonTeamPersonID = CAST(@PersonID AS uniqueidentifier)
+                              )
+                              INSERT INTO PersonTeam
+                                    (
+                                     PersonTeamPersonID
+                                    ,PersonTeamTeamID
+                                     )
+                              VALUES(
+                                     @PersonID
+                                    ,@TeamID
+                                     )
+                ELSE 
+                    UPDATE PersonTeam
+                    SET PersonTeamTeamID = CAST(@TeamID AS uniqueidentifier)
+                    WHERE PersonTeamPersonID = CAST(@PersonID AS uniqueidentifier)
+                "; 
+      }
+
+      db.Execute(sql, person);
+    }
+
+    void DeleteTeam(string personID)
+    {
+      using var db = new SqlConnection(_connectionString);
+      var teamsql = @"
+                      DELETE FROM PersonTeam
+                      WHERE PersonTeamPersonID = CAST(@personID AS uniqueidentifier)
+                      ";
+      db.Execute(teamsql, new { personID });
     }
 
 
-    public Person UpdatePerson(Person person)
+    public async Task<Person> UpdatePerson(Person person)
     {
+      HandleTeam(person);
+
       using var db = new SqlConnection(_connectionString);
 
       var sql = @"
                   UPDATE PERSON 
-                          PersonFireBase     = @PersonFireBase
+                     SET  PersonFireBase     = @PersonFireBase
                          ,PersonFName        = @PersonFName
                          ,PersonMInitial     = @PersonMInitial
                          ,PersonLName        = @PersonLName
@@ -159,7 +222,7 @@ namespace WorkersOnSite_2_API.Model
         PersonSalary = person.Salary,
         PersonPhoneNumber1 = person.PersonPhoneNumber1,
         PersonPhoneNumber2 = person.PersonPhoneNumber2,
-        PersonType = 2
+        PersonType = (int)person._PersonType
       };
 
       return db.QueryFirstOrDefault<Person>(sql, parameters);
@@ -167,7 +230,10 @@ namespace WorkersOnSite_2_API.Model
 
     public void DeletePerson(string personID)
     {
+      DeleteTeam(personID);
+
       using var db = new SqlConnection(_connectionString);
+
       var sql = @"
                   DELETE 
                   FROM PERSON
@@ -176,8 +242,6 @@ namespace WorkersOnSite_2_API.Model
 
       db.Execute(sql, new { personID });
     }
-
-
 
   }
 }

@@ -26,7 +26,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       _Sites = db.Query<Site>(@"
-                                SELECT cast(SiteID as varchar(36)) SiteID     
+                                SELECT CAST(SiteID AS varchar(36)) SiteID     
                                       ,SiteName
                                       ,SiteLocation
                                       ,SiteNumber
@@ -47,7 +47,7 @@ namespace WorkersOnSite_2_API.Model
     {
       using var db = new SqlConnection(_connectionString);
       var sql = @"
-                  SELECT cast(SiteID as varchar(36)) SiteID     
+                  SELECT CAST(SiteID AS varchar(36)) SiteID     
                         ,SiteName
                         ,SiteLocation
                         ,SiteNumber
