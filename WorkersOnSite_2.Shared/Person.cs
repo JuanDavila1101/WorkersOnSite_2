@@ -15,5 +15,6 @@ namespace WorkersOnSite_2.Shared
     public string     PersonPhoneNumber1 { get; set; }
     public string     PersonPhoneNumber2 { get; set; }
     public PersonType _PersonType        { get; set; }
+    public string     TeamID             { get; set; }
   }
 }
