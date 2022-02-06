@@ -1,6 +1,6 @@
 ﻿@page "/siteoverview"
 
-<h1 class="page-title">All Teams</h1>
+<h1 class="page-title">All Sites</h1>
 
 @if (Sites == null)
 {
@@ -11,23 +11,26 @@ else
   <table class="table">
     <thead>
       <tr>
-        <th>Site ID</th>
+        @*<th>Site ID</th>*@
         <th>Site Name:</th>
         <th>Site Location:</th>
         <th>Is the Work completed:</th>
       </tr>
     </thead>
     <tbody>
-      @foreach (var oneSite in Sites)
+      @foreach (var site in Sites)
       {
       <tr>
-        <td>@oneSite.SiteID</td>
-        <td>@oneSite.SiteName</td>
-        <td>@oneSite.SiteLocation</td>
-        <td>@oneSite.SiteIsCompleted ? Yes : No</td>
+        @*<td>@oneSite.SiteID</td>*@
+        <td>@site.SiteName</td>
+        <td>@site.SiteLocation</td>
+        <td>@(site.SiteIsCompleted ? "Yes" : "No")</td>
         <td>
-          <a href="@($"/sitedetail/{oneSite.SiteID}")" class="btn btn-primary table-btn">
+          <a href="@($"/sitedetail/{site.SiteID}")" class="btn btn-primary table-btn">
             <i class="fas fa-info-circle"></i>
+          </a>
+          <a href="@($"siteedit/{site.SiteID}")" class="btn btn-primary table-btn">
+            <i class="fas fa-info-edit"></i>
           </a>
         </td>
       </tr>

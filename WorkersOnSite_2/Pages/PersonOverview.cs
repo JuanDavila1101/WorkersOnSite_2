@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkersOnSite_2.Components;
 using WorkersOnSite_2.Model;
 using WorkersOnSite_2.Shared;
 
@@ -20,7 +21,7 @@ namespace WorkersOnSite_2.Pages
     public string PersonID { get; set; }
     public Person Person { get; set; } = new Person();
     public IEnumerable<Person> Persons { get; set; }
-
+    protected AddPersonDialog AddPersonDialog { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -31,6 +32,19 @@ namespace WorkersOnSite_2.Pages
 
       return;
     }
+
+    protected void QuickAddPerson()
+    {
+      AddPersonDialog.Show();
+    }
+
+    public async void AddPersonDialog_OnDialogClose()
+    {
+      Persons = await PersonService.GetAllPersons();
+      StateHasChanged();
+    }
+
+
 
     //public PersonOverview(IPersonService personRepo)
     //{

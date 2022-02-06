@@ -8,5 +8,8 @@ namespace WorkersOnSite_2.Model
   {
     Task<IEnumerable<Site>> GetAllSites();
     Task<Site> GetSiteByID(string siteID);
+    Task<Site> AddSite(Site Site);
+    Task<Site> UpdateSite(Site Site);
+    Task<bool> DeleteSite(string SiteID);
   }
 }

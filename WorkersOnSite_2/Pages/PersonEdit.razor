@@ -30,6 +30,7 @@
       <div class="form-group row">
         <label for="personFirstName" class="col-sm-3">First Name:</label>
         <InputText id="personFirstName" class="form-control col-8" @bind-Value="@Person.PersonFName" placeholder="Please enter the first name" />
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Person.PersonFName)"/>*@
       </div>
 
       @*<div class="form-group row">
@@ -44,10 +45,11 @@
       <InputText id="personLastName" class="form-control col-8" @bind-Value="@Person.PersonLName" placeholder="Please enter the last name" />
     </div>*@
 
-      <div class="form-group row">
-        <label for="personLastName" class="col-sm-3">Last Name:</label>
-        <input @ref="personLastName" id="personLastName" class="form-control col-8" @bind="@Person.PersonLName" placeholder="Please enter the last name" />
-      </div>
+    <div class="form-group row">
+      <label for="personLastName" class="col-sm-3">Last Name:</label>
+      <input @ref="personLastName" id="personLastName" class="form-control col-8" @bind="@Person.PersonLName" placeholder="Please enter the last name" />
+      @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Person.PersonLName)" />*@
+    </div>
 
       <div class="form-group row">
         <label for="personSSN" class="col-sm-3">SSN:</label>
@@ -66,11 +68,13 @@
       <div class="form-group row">
         <label for="personPhoneNumber1" class="col-sm-3">Phone Number 1:</label>
         <InputText id="personPhoneNumber1" class="form-control col-8" @bind-Value="@Person.PersonPhoneNumber1" placeholder="Please enter Phone Number 1" />
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Person.PersonPhoneNumber1)" />*@
       </div>
 
       <div class="form-group row">
         <label for="personPhoneNumber2" class="col-sm-3">Phone Number 2:</label>
         <InputText id="personPhoneNumber2" class="form-control col-8" @bind-Value="@Person.PersonPhoneNumber2" placeholder="Please enter Phone Number 2" />
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Person.PersonPhoneNumber2)" />*@
       </div>
 
       <div class="form-group row">
