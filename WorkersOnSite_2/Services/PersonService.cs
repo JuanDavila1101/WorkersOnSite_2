@@ -1,9 +1,5 @@
-﻿using Dapper;
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -23,29 +19,11 @@ namespace WorkersOnSite_2.Model
       _httpClient = httpClient;
     }
 
-    private void LoadAllPeople()
-    {
-      //using var db = new SqlConnection(_connectionString);
-      //_persons = db.Query<Person>(@"
-      //                              SELECT PersonID          
-      //                                    ,PersonFireBase    
-      //                                    ,PersonFName       
-      //                                    ,PersonMInitial    
-      //                                    ,PersonLName       
-      //                                    ,PersonSSN         
-      //                                    ,PersonBirthday    
-      //                                    ,PersonSalary      
-      //                                    ,PersonPhoneNumber1
-      //                                    ,PersonPhoneNumber2
-      //                                    ,PersonType        
-      //                              FROM PERSON                                    
-      //                              ").ToList();
-    }
-
     private async Task<T> Get<T>(string url)
     {
       return await JsonSerializer.DeserializeAsync<T>
-               (await _httpClient.GetStreamAsync(url), new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+               (await _httpClient.GetStreamAsync(url), 
+                new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
     }
 
     //private async Task<T> Get<T>(string url, T itemToGet)
@@ -73,10 +51,16 @@ namespace WorkersOnSite_2.Model
       return await _httpClient.PutAsync(url, body);
     }
 
+
     public async Task<IEnumerable<Person>> GetAllPersons()
     {
       return await Get<List<Person>>("api/person");
     }
+
+
+
+
+
 
     public async Task<Person> GetPersonByID(string personID)
     {

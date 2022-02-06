@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WorkersOnSite_2.Shared;
 using WorkersOnSite_2_API.Model;
 
 namespace WorkersOnSite_2_API.Controllers
@@ -27,14 +28,39 @@ namespace WorkersOnSite_2_API.Controllers
     }
 
     // Get api/<controller>/id
-    [HttpGet("id")]
-    public async Task<IActionResult> GetSiteByID(string SiteID)
+    [HttpGet("{siteID}")]
+    public async Task<IActionResult> GetSiteByID(string siteID)
     {
-      var Site = await _SiteRepository.GetSiteByID(SiteID);
+      var site = await _SiteRepository.GetSiteByID(siteID);
 
-      return Ok(Site);
+      return Ok(site);
     }
 
+
+    [HttpPost]
+    public async Task<IActionResult> AddSite(Site site)
+    {
+      var siteObject = _SiteRepository.AddSite(site);
+
+      return Ok(siteObject);
+    }
+
+    [HttpDelete("{SiteID}")]
+    public IActionResult DeleteSite(string SiteID)
+    {
+      _SiteRepository.DeleteSite(SiteID);
+
+      return Ok(true);
+
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateSite(Site site)
+    {
+      var updatedSite = _SiteRepository.UpdateSite(site);
+
+      return Ok(updatedSite);
+    }
 
   }
 }

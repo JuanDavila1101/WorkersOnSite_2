@@ -1,0 +1,135 @@
+﻿@page "/siteedit"
+@page "/siteedit/{SiteID}"
+
+@using WorkersOnSite_2.Shared
+
+
+@if (!Saved)
+{
+  <section class="Site-edit">
+    <h1 class="page-tittle">Details for Worker @Site.SiteName </h1>
+    <EditForm Model="@Site" OnValidSubmit="@HandleValidSubmit"
+              OnInvalidSubmit="@HandleInvalidSubmit">
+      <DataAnnotationsValidator />
+      <ValidationSummary></ValidationSummary>
+
+      @*<div class="form-group" row>
+        <label for="image" class="col-sm-3">/Select Image</label>
+      <InputFile OnChange="OnInputFileChange" multiple/>
+    </div>*@
+
+
+      @*<div class="form-group row">
+      <label for="SiteLastName" class="col-sm-3">Last Name:</label>
+      <input @ref="SiteLastNameInput" id="SiteLastName" class="form-control col-8" @bind="@Site.SiteLName" />
+    </div>*@
+
+
+
+
+      <div class="form-group row">
+        <label for="SiteName" class="col-sm-3">Site Name:</label>
+        <InputText id="SiteName" class="form-control col-8" @bind-Value="@Site.SiteName" placeholder="Please enter the site name" />
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Site.SiteFName)"/>*@
+      </div>
+
+      @*<div class="form-group row">
+      <label for="SiteMiddleInitial" class="col-sm-3">Middle Initial:</label>
+      <InputText id="SiteMiddleInitial" class="form-control col-8" @bind-Value="@Site.SiteMInitial" placeholder="Enter the middle initial" />
+    </div>*@
+
+
+      @*This is co the middle initial*@
+      @*<div class="form-group row">
+      <label for="SiteLastName" class="col-sm-3">Last Name:</label>
+      <InputText id="SiteLastName" class="form-control col-8" @bind-Value="@Site.SiteLName" placeholder="Please enter the last name" />
+    </div>*@
+
+    <div class="form-group row">
+      <label for="siteLocationRef" class="col-sm-3">Site Location :</label>
+      <input @ref="siteLocationRef" id="SiteLocation" class="form-control col-8" @bind="@Site.SiteLocation" placeholder="Please enter the location" />
+      @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Site.SiteLName)" />*@
+    </div>
+
+      <div class="form-group row">
+        <label for="SiteNumber" class="col-sm-3">Site number:</label>
+        <InputText id="SiteNumber" class="form-control col-8" @bind-Value="@Site.SiteNumber" placeholder="Please enter the site number" />
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="SiteStartTime" class="col-sm-3">Work Start Date:</label>
+        <InputDate id="SiteStartTime" class="form-control col-8" @bind-Value="@Site.SiteStartTime" />
+      </div>
+
+
+
+      <!--<div class="form-group row">
+        <label for="SitePhoneNumber1" class="col-sm-3">Phone Number 1:</label>
+        <InputText id="SitePhoneNumber1" class="form-control col-8" @bind-Value="@Site.SitePhoneNumber1" placeholder="Please enter Phone Number 1" />-->
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Site.SitePhoneNumber1)" />*@
+      <!--</div>-->
+
+      <!--<div class="form-group row">
+        <label for="SitePhoneNumber2" class="col-sm-3">Phone Number 2:</label>
+        <InputText id="SitePhoneNumber2" class="form-control col-8" @bind-Value="@Site.SitePhoneNumber2" placeholder="Please enter Phone Number 2" />-->
+        @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() =>Site.SitePhoneNumber2)" />*@
+      <!--</div>-->
+
+      @*<div class="form-group row">
+        <label for="team" class="col-sm-3">Team:</label>
+        <InputSelect id="team" class="form-control col-sm-8" @bind-Value="@Site.TeamID">
+          @foreach (var team in Teams)
+          {
+            <option value="@team.TeamID">@team.TeamName</option>
+          }
+        </InputSelect>
+      </div>
+
+      <div class="form-group row">
+        <label for="type" class="col-sm-3">Site Type:</label>
+        <InputSelect id="team" class="form-control col-sm-8" @bind-Value="@Site._SiteType">
+
+        <option value="@(SiteType.Customer)">Customer</option>
+        <option value="@(SiteType.Employee)">Employee</option>
+        <option value="@(SiteType.Manager)">Manager</option>
+        <option value="@(SiteType.TeamLead)">Team lead</option>
+
+        </InputSelect>
+      </div>*@
+
+      @if (Site.SiteID != "")
+      {
+        <a class="btn btn-danger" @onclick="@DeleteSite">Delete</a>
+      }
+
+      <a class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</a>
+
+      <button type="submit" class="btn btn-primary edit-btn">Save Site</button>
+
+    </EditForm>
+
+
+
+  </section>
+
+}
+else
+      {
+        <div class="alert @StatusClass">@Message</div>
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+﻿@if (ShowDialog)
+{
+  <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="titleModalLabel">Quick add person</h5>
+          <button type="button" class="close" @onclick="@Close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <EditForm Model="@Person" OnValidSubmit="@HandleValidationSubmit">
+            <div class="form-group row">
+              <label for="personFirstName" class="col-sm-3">First Name:</label>
+              <InputText id="personFirstName" class="form-control col-8" @bind-Value="@Person.PersonFName" placeholder="Please enter the first name" />
+              @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Person.PersonFName)"/>*@
+            </div>
+
+            <div class="form-group row">
+              <label for="personLastName" class="col-sm-3">Last Name:</label>
+              <input id="personLastName" class="form-control col-8" @bind="@Person.PersonLName" placeholder="Please enter the last name" />
+              @*<ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => Person.PersonLName)" />*@
+            </div>
+
+            <button type="submit" class="btn btn-primary edit-btn">Save person</button>
+            <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+          </EditForm>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Send message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}

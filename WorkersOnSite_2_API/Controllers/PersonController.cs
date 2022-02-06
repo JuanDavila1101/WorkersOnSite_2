@@ -37,6 +37,8 @@ namespace WorkersOnSite_2_API.Controllers
       return Ok(person);
     }
 
+
+
     [HttpPost]
     public async Task<IActionResult> AddPerson(Person person)
     {
@@ -64,8 +66,6 @@ namespace WorkersOnSite_2_API.Controllers
 
 
 
-
-
     //// Get api/<controller>/id
     ////[HttpGet("id")]'
     //[HttpGet("api/person/{personID}")]
@@ -75,9 +75,6 @@ namespace WorkersOnSite_2_API.Controllers
 
     //  return Ok(person);
     //}
-
-
-
 
 
 

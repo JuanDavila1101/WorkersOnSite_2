@@ -8,5 +8,9 @@ namespace WorkersOnSite_2_API.Model
   {
     IEnumerable<Site> GetAllSites();
     Task<Site> GetSiteByID(string siteID);
+    Task<Site> AddSite(Site site);
+    Task<Site> UpdateSite(Site site);
+    void DeleteSite(string siteID);
+
   }
 }

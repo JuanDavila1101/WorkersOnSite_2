@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using WorkersOnSite_2.Model;
 using System.Net.Http;
 using System;
+//using MudBlazor.Services;
 //using Microsoft.Extensions.Configuration;
 //using Microsoft.AspNetCore.Builder;
 //using Microsoft.Extensions.Logging;
@@ -25,7 +26,8 @@ namespace WorkersOnSite_2
       builder.Services.AddHttpClient<IPersonService, PersonService>(client => client.BaseAddress=new Uri("https://localhost:44354"));
       builder.Services.AddHttpClient<ISiteService, SiteService>(client => client.BaseAddress = new Uri("https://localhost:44354"));
       builder.Services.AddHttpClient<ITeamService, TeamService>(client => client.BaseAddress = new Uri("https://localhost:44354"));
-      
+      //builder.Services.AddMudServices();
+
       await builder.Build().RunAsync();
     }
   }
